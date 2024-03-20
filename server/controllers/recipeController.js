@@ -23,6 +23,28 @@ exports.homepage = async(req, res) => {
   }
 }
 
+exports.about = async(req, res) => {
+  try {
+    const limitNumber = 5;
+    
+
+    res.render('about', { title: 'Cooking Blog - About'} );
+  } catch (error) {
+    res.satus(500).send({message: error.message || "Error Occured" });
+  }
+}
+
+exports.contact = async(req, res) => {
+  try {
+    const limitNumber = 5;
+    
+
+    res.render('contact', { title: 'Cooking Blog - Contact'} );
+  } catch (error) {
+    res.satus(500).send({message: error.message || "Error Occured" });
+  }
+}
+
 /**
  * GET /categories
  * Categories 
@@ -36,6 +58,10 @@ exports.exploreCategories = async(req, res) => {
     res.status(500).send({message: error.message || "Error Occured" });
   }
 } 
+
+
+
+
 
 
 /**

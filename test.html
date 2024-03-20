@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel</title>
+  <style>
+    body {
+      background-color: slateblue;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      gap: 1rem;
+    }
+
+    .carousel {
+      --margin: 4rem;
+
+      position: relative;
+      width: min(35rem, 100% - 4rem);
+      min-height: 30rem;
+      margin-top: var(--margin);
+      border-color: rgb(57, 53, 53);
+      border-width: 150px;
+    }
+    
+    .carousel__item {
+      background-color: white;
+      border-radius: 0.5rem;
+      position: absolute;
+      height: 80%;
+      transform-origin: top;
+      transition: all 1s cubic-bezier(0.28, 0.55, 0.385, 1.65);
+      width: 100%;
+      
+      border-color: rgb(57, 53, 53);
+      border-width: 150px;
+    }
+
+    .carousel__item:nth-child(1) {
+      z-index: 6;
+      top: 1rem;
+      transform: scale(1.1);
+      opacity: 0;
+    }
+    
+    .carousel__item:nth-child(2) {
+      z-index: 5;
+      top: 0;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .carousel__item:nth-child(3) {
+      z-index: 4;
+      top: -1rem;
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+
+    .carousel__item:nth-child(4) {
+      z-index: 4;
+      top: -2rem;
+      transform: scale(0.9);
+      opacity: 0.7;
+    }
+    
+    .carousel__item:nth-child(n+5) {
+      z-index: 3;
+      top: -3rem;
+      transform: scale(0.8);
+      opacity: 0;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <div class="carousel__item">1</div>
+    <div class="carousel__item">2</div>
+    <div class="carousel__item">3</div>
+    <div class="carousel__item">4</div>
+    <div class="carousel__item">5</div>
+  </div>
+  <div class="controls">
+    <button class="prev">Prev</button>
+    <button class="next">Next</button>
+  </div>
+
+  <script>
+    const carousel = document.querySelector(".carousel");
+    const nextBtn = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
+
+    nextBtn.addEventListener("click", () => {
+      const clone = carousel.firstElementChild.cloneNode(true);
+      carousel.firstElementChild.remove();
+      carousel.append(clone);
+    });
+
+    prevBtn.addEventListener("click", () => {
+      const clone = carousel.lastElementChild.cloneNode(true);
+      carousel.lastElementChild.remove();
+      carousel.prepend(clone);
+    });
+
+    // Automatically change slides every 5 seconds
+    setInterval(() => {
+      const clone = carousel.firstElementChild.cloneNode(true);
+      carousel.firstElementChild.remove();
+      carousel.append(clone);
+    }, 5000);
+  </script>
+</body>
+</html>
